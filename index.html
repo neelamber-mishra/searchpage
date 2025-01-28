@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+    <title>Search Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="search-bar" id="search-bar">
+        <div class="search-text">
+            <input type="text" placeholder="search">
+        </div>
+        
+        <button id="search"><i class="fas fa-search"></i></button>
+    </div>
+    <script>
+        document.getElementById("search-bar").addEventListener("keyup",function(event){
+            if(event.keyCode == 13){
+                var search = document.getElementById("search-bar").querySelector("input").value;
+                search = "https://www.google.com/search?q=" +search;
+                window.location.href = search;
+            }
+        })
+        document.getElementById("search-bar").addEventListener("keyup", function(event){
+            if(event.keyCode == 13 && event.shiftKey){
+                var search = document.getElementById("search-bar").querySelector("input").value;
+                search = "https://www.google.com/search?q=" + search;
+                window.open(search, "_blank");
+            }
+        });
+        document.getElementById("search").addEventListener("click", function(){
+            var search = document.getElementById("search-bar").querySelector("input").value;
+            search = "https://www.google.com/search?q=" +search;
+           // alert(search);
+            window.location.href = search;
+        });
+        // Change the background each time the page loads
+window.onload = function() {
+    changeBackground();
+};
+
+// Function to change the background image
+function changeBackground() {
+    var backgrounds = [
+         // Example image, adjust the path if needed
+         'url("1.jpg")',
+        'url("2.avif")',
+        'url("4.png")'
+    ];
+
+    // Randomly select a background image
+    var randomIndex = Math.floor(Math.random() * backgrounds.length);
+    
+    // Apply the random background to the body
+    document.body.style.backgroundImage = backgrounds[randomIndex];
+}
+
+    </script>
+    <!-- <script src="./index.js"></script> -->
+</body>
