@@ -5,6 +5,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <select id="search-engine" style="width: 200px;">
+        <option value="1" data-icon="fab fa-google">Google</option>
+        <option value="2" data-icon="fab fa-microsoft">Bing</option>
+        <option value="3" data-icon="fab fa-yahoo">Yahoo</option>
+        <option value="5" data-icon="fas fa-duck">DuckDuckGo</option>
+        <option value="5" data-icon="fas fa-duck">DuckDuckGo</option>
+        <option value="5" data-icon="fas fa-duck">DuckDuckGo</option>
+    </select>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script>
+        $(document).ready(function() {
+            $('#search-engine').select2({
+                templateResult: formatOption,
+                templateSelection: formatOption
+            });
+    
+            function formatOption(option) {
+                if (!option.id) return option.text;  // Prevents errors with the first empty option
+                var icon = $(option.element).data('icon');
+                // Ensure proper handling of icons within Select2 options
+                return $('<span><i class="' + icon + '"></i> ' + option.text + '</span>');
+            }
+        });
+    </script>
     <div class="search-bar" id="search-bar">
         <div class="search-text">
             <input type="text" placeholder="search">
@@ -13,27 +42,86 @@
         <button id="search"><i class="fas fa-search"></i></button>
     </div>
     <script>
+        function reach(){
+            var search = document.getElementById("search-bar").querySelector("input").value;
+            var num = parseInt(document.getElementById("search-engine").value);
+            switch(num) {
+                case 1:{
+                    search = "https://www.google.com/search?q=" +search;
+                    break;
+                }
+                case 2:{
+                    search = "https://www.bing.com/search?q=" +search;
+                    break;
+                }
+                case 3:{
+                    search = "https://search.yahoo.com/search?p=" +search;
+                    break;
+                }
+                case 4:{
+                    search = "https://www.duckduckgo.com/search?q=" +search;
+                    break;
+                }
+                case 5: {
+                    search = `https://www.startpage.com/do/search?q=${search}`;
+                    break;
+                }
+                case 6: {
+                    search = "https://www.brave.com/search?q=" +search;
+                    break;
+                }
+                default: {
+                    search = "https://www.google.com/search?q=" +search;
+                    break;
+                }
+            }
+            return search;
+        }
         document.getElementById("search-bar").addEventListener("keyup",function(event){
             if(event.keyCode == 13){
-                var search = document.getElementById("search-bar").querySelector("input").value;
-                search = "https://www.google.com/search?q=" +search;
-                window.location.href = search;
+                var search = reach();
+                if(event.shiftKey) window.open(search, "_blank");
+                else window.location.href = search;
             }
         })
-        document.getElementById("search-bar").addEventListener("keyup", function(event){
-            if(event.keyCode == 13 && event.shiftKey){
-                var search = document.getElementById("search-bar").querySelector("input").value;
-                search = "https://www.google.com/search?q=" + search;
-                window.open(search, "_blank");
-            }
-        });
+        // document.getElementById("search-bar").addEventListener("keyup", function(event){
+        //     if(event.keyCode == 13 && event.shiftKey){
+        //         var search = document.getElementById("search-bar").querySelector("input").value;
+        //         search = "https://www.google.com/search?q=" + search;
+        //         window.open(search, "_blank");
+        //     }
+        // });
         document.getElementById("search").addEventListener("click", function(){
-            var search = document.getElementById("search-bar").querySelector("input").value;
-            search = "https://www.google.com/search?q=" +search;
-           // alert(search);
+            var search = reach();
+            var num = document.getElementById("search-engine").value;
+            switch(num) {
+                case 1:{
+                    search = "https://www.google.com/search?q=" +search;
+                    break;
+                }
+                case 2:{
+                    search = "https://www.bing.com/search?q=" +search;
+                    break;
+                }
+                case 3:{
+                    search = "https://www.yahoo.com/search?q=" +search;
+                    break;
+                }
+                case 4:{
+                    search = "https://www.duckduckgo.com/search?q=" +search;
+                    break;
+                }
+                case 5: {
+                    search = `https://www.startpage.com/do/search?q=your+${search}+query`;
+                    break;
+                }
+                case 6: {
+                    search = "https://www.brave.com/search?q=" +search;
+                    break;
+                }
+            }
             window.location.href = search;
         });
-        // Change the background each time the page loads
 window.onload = function() {
     changeBackground();
 };
@@ -41,19 +129,15 @@ window.onload = function() {
 // Function to change the background image
 function changeBackground() {
     var backgrounds = [
-         // Example image, adjust the path if needed
          'url("1.jpg")',
         'url("2.avif")',
         'url("4.png")'
     ];
-
-    // Randomly select a background image
     var randomIndex = Math.floor(Math.random() * backgrounds.length);
     
-    // Apply the random background to the body
     document.body.style.backgroundImage = backgrounds[randomIndex];
 }
 
     </script>
-    <!-- <script src="./index.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
