@@ -9,9 +9,9 @@
         <option value="1" data-icon="fab fa-google">Google</option>
         <option value="2" data-icon="fab fa-microsoft">Bing</option>
         <option value="3" data-icon="fab fa-yahoo">Yahoo</option>
-        <option value="5" data-icon="fas fa-duck">DuckDuckGo</option>
-        <option value="5" data-icon="fas fa-duck">DuckDuckGo</option>
-        <option value="5" data-icon="fas fa-duck">DuckDuckGo</option>
+        <option value="4" data-icon="fas fa-duck">DuckDuckGo</option>
+        <option value="5" data-icon="fas fa-duck">startpage</option>
+        <option value="6" data-icon="fas fa-duck">brave</option>
     </select>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -94,33 +94,7 @@
         document.getElementById("search").addEventListener("click", function(){
             var search = reach();
             var num = document.getElementById("search-engine").value;
-            switch(num) {
-                case 1:{
-                    search = "https://www.google.com/search?q=" +search;
-                    break;
-                }
-                case 2:{
-                    search = "https://www.bing.com/search?q=" +search;
-                    break;
-                }
-                case 3:{
-                    search = "https://www.yahoo.com/search?q=" +search;
-                    break;
-                }
-                case 4:{
-                    search = "https://www.duckduckgo.com/search?q=" +search;
-                    break;
-                }
-                case 5: {
-                    search = `https://www.startpage.com/do/search?q=your+${search}+query`;
-                    break;
-                }
-                case 6: {
-                    search = "https://www.brave.com/search?q=" +search;
-                    break;
-                }
-            }
-            window.location.href = search;
+           window.location.href = search;
         });
 window.onload = function() {
     changeBackground();
